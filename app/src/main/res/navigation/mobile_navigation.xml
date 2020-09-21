@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.mattg.myrecipes.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_home_to_nav_addrecipe"
+            app:destination="@id/nav_addrecipe"
+            app:enterAnim="@anim/enter_left_to_right"
+            app:exitAnim="@anim/exit_right_to_left"
+            app:popEnterAnim="@anim/exit_right_to_left"
+            app:popExitAnim="@anim/enter_left_to_right"
+            app:popUpTo="@id/nav_home" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_viewrecipes"
+            app:destination="@id/nav_viewrecipes"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_nav_home_to_viewApiRecipeFragment"
+            app:destination="@id/viewApiRecipeFragment"
+            app:popUpTo="@id/nav_home" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_viewrecipes"
+        android:name="com.mattg.myrecipes.ui.viewrecipes.ViewRecipesFragment"
+        android:label="@string/menu_viewrecipes"
+        tools:layout="@layout/fragment_viewrecipes"
+        >
+        <action
+            android:id="@+id/action_nav_viewrecipes_to_nav_home"
+            app:destination="@id/nav_home" />
+        <action
+            android:id="@+id/action_nav_viewrecipes_to_nav_addrecipe"
+            app:destination="@id/nav_addrecipe" />
+        <argument android:name="id"
+            app:argType="string"
+            android:defaultValue="666" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_addrecipe"
+        android:name="com.mattg.myrecipes.ui.addrecipe.AddRecipeFragment"
+        android:label="@string/menu_addrecipe"
+        tools:layout="@layout/fragment_addrecipe" >
+        <action
+            android:id="@+id/action_nav_addrecipe_to_nav_home"
+            app:destination="@id/nav_home"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down"
+            app:popEnterAnim="@anim/slide_down"
+            app:popExitAnim="@anim/slide_up" />
+        <action
+            android:id="@+id/action_nav_addrecipe_to_nav_viewrecipes"
+            app:destination="@id/nav_viewrecipes"
+            app:popUpTo="@id/nav_home" />
+        <argument
+            android:name="id"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="666" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewApiRecipeFragment"
+        android:name="com.mattg.myrecipes.ui.viewapirecipe.ViewApiRecipeFragment"
+        android:label="Recipe Details"
+        tools:layout="@layout/view_api_recipe_fragment">
+        <action
+            android:id="@+id/action_viewApiRecipeFragment_to_nav_home"
+            app:destination="@id/nav_home"
+            app:popUpTo="@id/nav_home" />
+        <argument
+            android:name="positionInt"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_viewApiRecipeFragment_to_nav_viewrecipes"
+            app:destination="@id/nav_viewrecipes"
+            app:popUpTo="@id/nav_home" />
+    </fragment>
+</navigation>
