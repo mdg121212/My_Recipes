@@ -5,13 +5,12 @@ import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.mattg.myrecipes.RetrofitRepository.SpoonacularRepository
 import com.mattg.myrecipes.db.Recipe
 import com.mattg.myrecipes.db.RecipeRepository
 import com.mattg.myrecipes.db.RecipesDatabase
 import com.mattg.myrecipes.models.recipeSearchResult.RecipeResponse
 import com.mattg.myrecipes.models.responsePreset.Result
-
+import com.mattg.myrecipes.retrofitRepository.SpoonacularRepository
 
 
 //need context to show toasts in repository
@@ -34,37 +33,44 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         this.showProgress = repository.showProgress
     }
 
-    fun progressState(){
+    fun progressState() {
         repository.progressState()
     }
 
-    fun setHasCalled(){
+    fun setHasCalled() {
         hasCalled.value = true
     }
-    fun resetHasCalled(){
+
+    fun resetHasCalled() {
         hasCalled.value = false
     }
 
-    fun getHomeScreenRecipes(string: String){
-        repository.getMainScreenResult(string)
-    }
-
-    fun getRecipes() {
-       repository.getRetrofitResults()
-    }
-
-    fun getSingleRecipe(id: Int){
-     repository.getSingleRecipe(id)
-    }
-
-    fun fetchSearchResults(searchString: String){
+    fun setLoading() {
         loading.value = true
-        repository.getRetrofitResultsSearch(searchString)
+    }
+
+    fun setSearchResults() {
         apiResponseSearch.value = repository.responseListSearch.value
     }
 
+    fun getHomeScreenRecipes(string: String) {
+        repository.getMainScreenResult(string)
+    }
+
+
+    fun getSingleRecipe(id: Int) {
+
+        repository.getSingleRecipe(id)
+    }
+
+    fun fetchSearchResults(searchString: String) {
+
+        repository.getRetrofitResultsSearch(searchString)
+
+    }
+
     //saving the recipe to the local database
-      fun saveApiRecipe(title: String, ingredients: String, step: String, image: String?) {
+    fun saveApiRecipe(title: String, ingredients: String, step: String, image: String?) {
         val uri = Uri.parse("android.resource://com.mattg.myrecipes/drawable/placeholder")
         val recipeToSave = Recipe(
             title,
@@ -78,10 +84,10 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
             null,
             false
         )
-        val dao = RecipesDatabase.getInstance(this.getApplication()).recipeDao()
+
+        val dao = RecipesDatabase.getInstance(getApplication()).recipeDao()
         //get repository with dao
         val repository = RecipeRepository(dao)
         repository.insertRecipe(recipeToSave)
-
     }
 }

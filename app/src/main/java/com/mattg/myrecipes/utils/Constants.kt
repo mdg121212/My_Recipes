@@ -1,11 +1,16 @@
+@file:Suppress("DEPRECATION")
+
 package com.mattg.myrecipes.utils
 
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import androidx.annotation.RequiresApi
+
 
 object Constants {
+
 
     /**
      * This function is used check the weather the device is connected to the Internet or not.
@@ -29,4 +34,14 @@ object Constants {
             return networkInfo != null && networkInfo.isConnectedOrConnecting
         }
     }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    fun isNetworkAvailable2(context: Context) =
+        (context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).run {
+            getNetworkCapabilities(activeNetwork)?.run {
+                hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
+                        || hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+                        || hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)
+            } ?: false
+        }
 }

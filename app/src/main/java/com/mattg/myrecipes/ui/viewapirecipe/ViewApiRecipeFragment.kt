@@ -4,11 +4,11 @@ package com.mattg.myrecipes.ui.viewapirecipe
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.mattg.myrecipes.BaseFragment
 import com.mattg.myrecipes.R
 import com.mattg.myrecipes.ui.home.HomeViewModel
 import kotlinx.android.synthetic.main.view_api_recipe_fragment.*
@@ -17,14 +17,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
-class ViewApiRecipeFragment : Fragment() {
+class ViewApiRecipeFragment : BaseFragment() {
+
     private var position: Int = 0
+
     //passing the position in list of results via navArgs
     private val args: ViewApiRecipeFragmentArgs by navArgs()
     private lateinit var viewModel: HomeViewModel
     private var ingredientString = ""
     private var stepString = ""
-    private var imageLocation : String? = null
+    private var imageLocation: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

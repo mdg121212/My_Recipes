@@ -30,6 +30,7 @@ private const val TAKE_PICTURE_REQUEST_CODE = 1
 private const val GALLERY_PICTURE_REQUEST_CODE = 2
 
 //uri placeholders
+
 private var galleryUri = ""
 private var cameraUri = ""
 private var wasGallery: Boolean = false
@@ -41,14 +42,11 @@ private var isLeftover: Boolean = false
 
 class AddRecipeFragment : BaseFragment() {
 
-
     private lateinit var recipesViewModel: RecipesViewModel
     private var uriToSave = ""
     private val args: AddRecipeFragmentArgs by navArgs()
     private var loadedId = "notloaded"
     private var loadedImage = ""
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -62,6 +60,7 @@ class AddRecipeFragment : BaseFragment() {
         val date = root.textView_date
         val image = root.imageView_addphoto
         val checkBox = root.toggle_leftovers
+
         //get the date
         val currentTime: String = SimpleDateFormat(
             " d MMM yyyy",
@@ -74,6 +73,9 @@ class AddRecipeFragment : BaseFragment() {
         image.setOnClickListener {
             startPictureDialog()
         }
+
+        loadedId = args.id.toString()
+
         checkBox.setOnCheckedChangeListener { _, isChecked ->
             isLeftover = when (isChecked) {
                 true -> {
@@ -82,11 +84,9 @@ class AddRecipeFragment : BaseFragment() {
                 false -> {
                     false
                 }
-
             }
         }
 
-        loadedId = args.id.toString()
         val dao = RecipesDatabase.getInstance(requireContext()).recipeDao()
         //get repository with dao
         val repository = RecipeRepository(dao)
@@ -95,6 +95,7 @@ class AddRecipeFragment : BaseFragment() {
     }
 
     private fun startPictureDialog() {
+
         AlertDialog.Builder(requireContext())
             .setPositiveButton("Take Picture") { _, _ ->
                 takePicture()
@@ -110,11 +111,9 @@ class AddRecipeFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requireActivity().onBackPressedDispatcher.addCallback(this){
-            //making sure that from this fragment, when back button is pressed double check to save current
-            //recipe progress
+            //making sure that from this fragment, when back button is pressed double check to save current recipe progress
             showSaveDialog()
         }
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -123,15 +122,16 @@ class AddRecipeFragment : BaseFragment() {
         observeViewModelRecipe()
     }
 
-    private fun showSaveDialog(){
+    private fun showSaveDialog() {
+
         AlertDialog.Builder(requireContext()).setTitle("Do you want to save?")
-            .setPositiveButton("Yes") { dialog,_ ->
+            .setPositiveButton("Yes") { dialog, _ ->
                 saveRecipe()
                 findNavController().navigate(R.id.action_nav_addrecipe_to_nav_viewrecipes)
                 dialog.dismiss()
 
             }
-            .setNegativeButton("No"){ dialog, _ ->
+            .setNegativeButton("No") { dialog, _ ->
                 findNavController().navigate(R.id.action_nav_addrecipe_to_nav_viewrecipes)
                 dialog.dismiss()
 
@@ -139,8 +139,14 @@ class AddRecipeFragment : BaseFragment() {
     }
 
     private fun observeViewModelRecipe() {
+
         recipesViewModel.getRecipeById2(loadedId).observe(viewLifecycleOwner, {
             if (it != null) {
+                Toast.makeText(
+                    requireContext(),
+                    "loadedId gave us a recipe $loadedId",
+                    Toast.LENGTH_LONG
+                ).show()
                 wasLoaded = true
                 editText_addrecipe_directions.setText(it.directions)
                 if (it.imageOne != null) {
@@ -165,11 +171,13 @@ class AddRecipeFragment : BaseFragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.addrecipe, menu)
+
         super.onCreateOptionsMenu(menu, inflater)
 
     }
 
     private fun saveRecipe() {
+
         when (wasGallery) {
             true -> {
                 uriToSave = galleryUri
@@ -182,7 +190,8 @@ class AddRecipeFragment : BaseFragment() {
                 wasCamera = false
             }
         }
-        wasLoaded = recipesViewModel.saveUserRecipeToDb(
+
+        recipesViewModel.saveUserRecipeToDb(
             editText_addrecipe_title.text.toString(),
             editText_addrecipe_ingredients.text.toString(),
             editText_addrecipe_directions.text.toString(),
@@ -193,6 +202,7 @@ class AddRecipeFragment : BaseFragment() {
             isLeftover,
             loadedId
         )
+
     }
 
     private fun openGalleryGetImage() {
@@ -216,9 +226,9 @@ class AddRecipeFragment : BaseFragment() {
 
     }
 
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+
         if (resultCode == Activity.RESULT_OK && requestCode == GALLERY_PICTURE_REQUEST_CODE) {
             Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
             wasGallery = true
@@ -242,6 +252,7 @@ class AddRecipeFragment : BaseFragment() {
                 .load(forPic)
                 .into(imageView_addphoto)
         }
+
     }
 
     private fun getImageUri(inContext: Context, inImage: Bitmap): Uri? {
@@ -255,6 +266,5 @@ class AddRecipeFragment : BaseFragment() {
         )
         return Uri.parse(path)
     }
-
 
 }

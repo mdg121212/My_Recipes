@@ -1,12 +1,11 @@
 package com.mattg.myrecipes.db
 
-import android.widget.ImageView
-import androidx.databinding.BindingAdapter
+
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
-import com.bumptech.glide.Glide
+
 
 /**
  * imageTwo and imageThree exist for:  TODO add multiple image capability
@@ -36,7 +35,7 @@ data class Recipe (
     @ColumnInfo
     val isLeftover: Boolean?
 ) {
-    //ADD THIS SECONDARY CONSTRUCTOR TO ALLOW RECIPES TO BE CREATED WITHOUT THE ID PARAMETER (AUTOINCREMENT)
+    //SECONDARY CONSTRUCTOR TO ALLOW RECIPES TO BE CREATED WITHOUT THE ID PARAMETER (AUTOINCREMENT)
     @Ignore
     constructor(
         title: String?,

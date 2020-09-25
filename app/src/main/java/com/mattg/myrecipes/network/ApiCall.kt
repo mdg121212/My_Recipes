@@ -10,8 +10,10 @@ import retrofit2.http.Query
 
 interface ApiCall {
 
-    @GET("complexSearch?apiKey=02360b1608f54f4096530b82220410e6&instructionsRequired=true&addRecipeInformation=true")
+
+    @GET("complexSearch?&instructionsRequired=true&addRecipeInformation=true")
     fun getRecipes(
+        @Query("apiKey") key: String,
         @Query("number") number: Int,
         @Query("cuisine") cuisine: String?,
         @Query("query") query: String?,
@@ -20,25 +22,29 @@ interface ApiCall {
     ): Call<SpoonacularResponsePreset>
 
     //allows a general query of any parameters; for search bar home fragment
-    @GET("complexSearch?apiKey=02360b1608f54f4096530b82220410e6&instructionsRequired=true&addRecipeInformation=true&number=10")
+    @GET("complexSearch?&instructionsRequired=true&addRecipeInformation=true&number=10")
     fun getSearchedRecipes(
+        @Query("apiKey") key: String,
         @Query("query") query: String?
     ): Call<SpoonacularResponsePreset>
 
     //get the detailed instructions for a recipe
-    @GET("{id}/analyzedInstructions?apiKey=02360b1608f54f4096530b82220410e6")
+    @GET("{id}/analyzedInstructions?apiKey={key}")
     fun getRecipeDetailsById(
         @Path("id") id: Int,
+        @Path("key") key: String
     ): Call<AnalyzedInstruction>
 
-    @GET("https://api.spoonacular.com/recipes/{id}/information?apiKey=02360b1608f54f4096530b82220410e6&includeNutrition=false")
+    @GET("https://api.spoonacular.com/recipes/{id}/information?&includeNutrition=false")
     fun getSingleRecipe(
-        @Path("id") id: Int
+        @Path("id") id: Int,
+        @Query("apiKey") key: String
     )
             : Call<RecipeResponse>
 
-    @GET("complexSearch?apiKey=02360b1608f54f4096530b82220410e6&instructionsRequired=true&addRecipeInformation=true")
+    @GET("complexSearch?&instructionsRequired=true&addRecipeInformation=true")
     fun getRecipesMain(
+        @Query("apiKey") key: String,
         @Query("number") number: Int,
         @Query("query") cuisine: String?,
         @Query("sort") sort: String?

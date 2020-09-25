@@ -1,11 +1,10 @@
 package com.mattg.myrecipes.network
 
 import android.content.Context
-import com.mattg.myrecipes.BuildConfig
+import com.karumi.dexter.BuildConfig
 import com.mattg.myrecipes.models.recipeSearchResult.RecipeResponse
 import com.mattg.myrecipes.models.responsePreset.AnalyzedInstruction
 import com.mattg.myrecipes.models.responsePreset.SpoonacularResponsePreset
-
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -55,27 +54,45 @@ object ApiCallService {
         return api!!
     }
 
-    fun callSingleRecipe(context: Context, id: Int): Call<RecipeResponse> {
-        return getApi(context).getSingleRecipe(id)
+    //for getting a single recipe from recyclerview
+    fun callSingleRecipe(context: Context, id: Int, key: String): Call<RecipeResponse> {
+        return getApi(context).getSingleRecipe(id, key)
     }
 
-
-    fun callSearch(context: Context, key: String, searchString: String) : Call<SpoonacularResponsePreset> {
-        //call api here
-        //Search method, where a string is entered from input the api called with it
-       return getApi(context).getSearchedRecipes( searchString)
+    //for getting recipes via the search box
+    fun callSearch(
+        context: Context,
+        key: String,
+        searchString: String
+    ): Call<SpoonacularResponsePreset> {
+        return getApi(context).getSearchedRecipes(key, searchString)
     }
 
-    fun callPresetOnOpen(context: Context, number: Int, cuisine: String, query: String, sort: String ) : Call<SpoonacularResponsePreset>{
-        return getApi(context).getRecipes(number, cuisine, query, sort)
+    //originally loaded a random list of recipes to the home screen, still available but not in use
+    fun callPresetOnOpen(
+        context: Context,
+        key: String,
+        number: Int,
+        cuisine: String,
+        query: String,
+        sort: String
+    ): Call<SpoonacularResponsePreset> {
+        return getApi(context).getRecipes(key, number, cuisine, query, sort)
     }
 
-    fun callIdInstructions(context: Context, id: Int) : Call<AnalyzedInstruction>{
-        return getApi(context).getRecipeDetailsById(id)
+    fun callIdInstructions(context: Context, id: Int, key: String): Call<AnalyzedInstruction> {
+        return getApi(context).getRecipeDetailsById(id, key)
     }
 
-    fun callMainScreenGetRecipes(context: Context, key: String, number: Int, cuisine: String, sort: String) : Call<SpoonacularResponsePreset>{
-        return getApi(context).getRecipesMain( number, cuisine, sort)
+    //getting a recipe search result from home screen buttons
+    fun callMainScreenGetRecipes(
+        context: Context,
+        key: String,
+        number: Int,
+        cuisine: String,
+        sort: String
+    ): Call<SpoonacularResponsePreset> {
+        return getApi(context).getRecipesMain(key, number, cuisine, sort)
     }
 
 

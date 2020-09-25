@@ -1,10 +1,11 @@
-package com.mattg.myrecipes.RetrofitRepository
+package com.mattg.myrecipes.retrofitRepository
 
 import android.app.Application
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
+import com.mattg.myrecipes.MainActivity
 import com.mattg.myrecipes.R
 import com.mattg.myrecipes.models.recipeSearchResult.RecipeResponse
 import com.mattg.myrecipes.models.responsePreset.Result
@@ -22,7 +23,7 @@ class SpoonacularRepository(private val application: Application) {
     val responseListSearch = MutableLiveData<List<Result>>()
     val recipeResponse = MutableLiveData<RecipeResponse>()
     var resultString = ""
-    val key = application.getString(R.string.api_app_id)
+    private val key = MainActivity().getNativeKey1()
     fun progressState() {
         showProgress.value = !(showProgress.value != null && showProgress.value!!)
     }
@@ -31,22 +32,24 @@ class SpoonacularRepository(private val application: Application) {
 
 
     fun getSingleRecipe(id: Int) {
-        ApiCallService.callSingleRecipe(application, id).enqueue(object : Callback<RecipeResponse> {
-            override fun onResponse(
-                call: Call<RecipeResponse>,
-                response: Response<RecipeResponse>
-            ) {
-                showProgress.value = false
-                recipeResponse.value = response.body()
-            }
+        ApiCallService.callSingleRecipe(application, id, key)
+            .enqueue(object : Callback<RecipeResponse> {
+                override fun onResponse(
+                    call: Call<RecipeResponse>,
+                    response: Response<RecipeResponse>
+                ) {
+                    showProgress.value = false
+                    recipeResponse.value = response.body()
+                }
 
-            override fun onFailure(call: Call<RecipeResponse>, t: Throwable) {
-                showProgress.value = false
-                Toast.makeText(application, "Request Failed: Network Error", Toast.LENGTH_SHORT)
-                    .show()
-            }
-        })
+                override fun onFailure(call: Call<RecipeResponse>, t: Throwable) {
+                    showProgress.value = false
+                    Toast.makeText(application, "Request Failed: Network Error", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            })
     }
+
     fun getRetrofitResultsSearch(query: String) {
         ApiCallService.callSearch(application, key, query)
             .enqueue(object : Callback<SpoonacularResponsePreset> {
@@ -55,6 +58,7 @@ class SpoonacularRepository(private val application: Application) {
                     Toast.makeText(application, "Request Failed: Network Error", Toast.LENGTH_SHORT)
                         .show()
                 }
+
                 override fun onResponse(
                     call: Call<SpoonacularResponsePreset>,
                     response: Response<SpoonacularResponsePreset>
@@ -80,7 +84,14 @@ class SpoonacularRepository(private val application: Application) {
         val randomCuisine = getRandomString(cuisines)
         val randomProtien = getRandomString(proteins)
 
-        ApiCallService.callPresetOnOpen(application, 10, randomCuisine, randomProtien, "random")
+        ApiCallService.callPresetOnOpen(
+            application,
+            key,
+            10,
+            randomCuisine,
+            randomProtien,
+            "random"
+        )
             .enqueue(object : Callback<SpoonacularResponsePreset> {
                 override fun onFailure(call: Call<SpoonacularResponsePreset>, t: Throwable) {
                     showProgress.value = false
@@ -97,7 +108,7 @@ class SpoonacularRepository(private val application: Application) {
                     response: Response<SpoonacularResponsePreset>
                 ) {
                     showProgress.value = false
-                   //Generate a list of results when the response code is success
+                    //Generate a list of results when the response code is success
                     if (response.code() == 200) {
                         val list = response.body()!!.results
                         resultString = list.toString()
@@ -117,7 +128,7 @@ class SpoonacularRepository(private val application: Application) {
     }
 
     fun getMainScreenResult(input: String) {
-        ApiCallService.callMainScreenGetRecipes(application, key,15, input, "random")
+        ApiCallService.callMainScreenGetRecipes(application, key, 15, input, "random")
             .enqueue(object : Callback<SpoonacularResponsePreset> {
                 override fun onFailure(call: Call<SpoonacularResponsePreset>, t: Throwable) {
                     showProgress.value = false

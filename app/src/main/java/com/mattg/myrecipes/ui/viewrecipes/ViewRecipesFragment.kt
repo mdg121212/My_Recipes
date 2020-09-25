@@ -32,17 +32,16 @@ class ViewRecipesFragment : BaseFragment() {
             savedInstanceState: Bundle?
     ): View? {
         setHasOptionsMenu(true)
-        //INFLATE VIEW AND GET INSTANCE OF BINDING CLASS HERE LIKE THIS
+        //inflate view
         val view = inflater.inflate(R.layout.fragment_viewrecipes, container, false)
-        //  displayRecipesList()
+        //create dao
         val dao = RecipesDatabase.getInstance(requireContext()).recipeDao()
         //get repository with dao
         val repository = RecipeRepository(dao)
         //create factory with repository
         val factory = RecipeViewModelFactory(repository)
 
-
-        //assign viewmodel instance to data binding object
+        //assign viewModel instance to data binding object
         recipesViewModel = ViewModelProvider(this, factory).get(RecipesViewModel::class.java)
         observeViewModel()
 
@@ -93,7 +92,7 @@ class ViewRecipesFragment : BaseFragment() {
         recipesViewModel.positionFromAdapter.observe(viewLifecycleOwner, {
             positionFromAdapterFragment = it
         })
-        recipesViewModel.diaologInt.observe(viewLifecycleOwner, {
+        recipesViewModel.dialogInt.observe(viewLifecycleOwner, {
             dialogInt = it
         })
 
@@ -121,7 +120,7 @@ class ViewRecipesFragment : BaseFragment() {
 
          AlertDialog.Builder(requireContext()).setTitle("View recipe?")
             .setPositiveButton("Yes") { _, _ ->
-                        //get relevant data from current recipe
+                //get relevant data from current recipe
                 val recipe = listForFragment?.get(position)
                 //create a dialog that shows this data in an inflated layout
                 val viewDialog = AlertDialog.Builder(context)

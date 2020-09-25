@@ -14,6 +14,9 @@ import com.mattg.myrecipes.MainActivity
 import com.mattg.myrecipes.R
 import com.mattg.myrecipes.ui.viewrecipes.ApiClickListener
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.*
 
 
@@ -22,21 +25,23 @@ class HomeFragment : Fragment() {
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var adapter: ApiRecipeAdapter
     private lateinit var clickListener: ApiClickListener
+    private lateinit var homeScreenViews: List<View>
+    private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Default)
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         setHasOptionsMenu(true)
         homeViewModel =
-                ViewModelProvider(this).get(HomeViewModel::class.java)
+            ViewModelProvider(this).get(HomeViewModel::class.java)
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-            //create a list of all views that need to have their visibility attribute changed
-            //so they can be referenced as a group
-        val homeScreenViews = listOf<View>(
+
+        //create a list of all views that need to have their visibility attribute changed
+        homeScreenViews = listOf<View>(
             mexican_button_layout,
             thai_button_layout,
             american_button_layout,
@@ -49,6 +54,7 @@ class HomeFragment : Fragment() {
         val recycler = rv_home_apirecipes
 
         progressBar_home.visibility = View.INVISIBLE
+
         //observe viewModel flag (whether an api call has been made)
         homeViewModel.hasCalled.observe(viewLifecycleOwner, {
             if (it) {
@@ -117,7 +123,10 @@ class HomeFragment : Fragment() {
         val string = getTitleString(textView)
         //setting the flag in the viewModel to inform if a call has been made
         homeViewModel.setHasCalled()
-        homeViewModel.getHomeScreenRecipes(string)
+        coroutineScope.launch {
+            homeViewModel.getHomeScreenRecipes(string)
+        }
+
         //linking up the progress bar all the way to repository via viewModel from here
         homeViewModel.progressState()
         homeViewModel.showProgress.observe(viewLifecycleOwner, {
@@ -138,16 +147,28 @@ class HomeFragment : Fragment() {
         menu.findItem(R.id.search_home_menu).apply {
             actionView = searchView
         }
-        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null) {
                     homeViewModel.searchString = query
                 }
+
+                homeViewModel.setLoading()
+
+
                 homeViewModel.fetchSearchResults(searchString = homeViewModel.searchString)
-                hideHomeDefaultItems()
+
+
+
+                homeViewModel.setSearchResults()
+
+                hideHomeDefaultItems(homeScreenViews)
+                rv_home_apirecipes.visibility = View.VISIBLE
+
                 return true
             }
+
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText != null) {
                     homeViewModel.searchString = newText
@@ -157,15 +178,10 @@ class HomeFragment : Fragment() {
         })
     }
 
-    private fun hideHomeDefaultItems() {
-        american_button_layout.visibility = View.GONE
-        thai_button_layout.visibility = View.GONE
-        chinese_button_layout.visibility = View.GONE
-        breakfast_button_layout.visibility = View.GONE
-        dessert_button_layout.visibility = View.GONE
-        mexican_button_layout.visibility = View.GONE
-        indian_button_layout.visibility = View.GONE
-        rv_home_apirecipes.visibility = View.VISIBLE
+    private fun hideHomeDefaultItems(views: List<View>) {
+        for (view in views) {
+            view.visibility = View.GONE
+        }
     }
 
     private fun setHomeScreenItemsClickListeners(
@@ -173,36 +189,36 @@ class HomeFragment : Fragment() {
         homeScreenViews: List<View>
     ) {
         //animation for these items
-        val bounceAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.fade_out)
+        val fadeAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.fade_out)
 
         mexican_button_layout.setOnClickListener {
             viewOnClickedMethod(recycler, homeScreenViews, tv_mexican_title)
-            it.startAnimation(bounceAnimation)
+            it.startAnimation(fadeAnimation)
         }
         american_button_layout.setOnClickListener {
             viewOnClickedMethod(recycler, homeScreenViews, tv_american_title)
-            it.startAnimation(bounceAnimation)
+            it.startAnimation(fadeAnimation)
         }
         dessert_button_layout.setOnClickListener {
             viewOnClickedMethod(recycler, homeScreenViews, tv_dessert_title)
-            it.startAnimation(bounceAnimation)
+            it.startAnimation(fadeAnimation)
         }
         breakfast_button_layout.setOnClickListener {
             viewOnClickedMethod(recycler, homeScreenViews, tv_breakfast_title)
-            it.startAnimation(bounceAnimation)
+            it.startAnimation(fadeAnimation)
         }
         chinese_button_layout.setOnClickListener {
             viewOnClickedMethod(recycler, homeScreenViews, tv_chinese_title)
-            it.startAnimation(bounceAnimation)
+            it.startAnimation(fadeAnimation)
         }
         thai_button_layout.setOnClickListener {
             viewOnClickedMethod(recycler, homeScreenViews, tv_thai_title)
-            it.startAnimation(bounceAnimation)
+            it.startAnimation(fadeAnimation)
         }
 
         indian_button_layout.setOnClickListener {
             viewOnClickedMethod(recycler, homeScreenViews, tv_indian_title)
-            it.startAnimation(bounceAnimation)
+            it.startAnimation(fadeAnimation)
         }
     }
 

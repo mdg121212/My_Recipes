@@ -27,11 +27,8 @@ class RecipesViewModel(private val repository: RecipeRepository) : ViewModel() {
     val recipe: LiveData<Recipe> = _recipe
 
     private val testDialogRecipe = MutableLiveData<Int>()
-    val diaologInt = MutableLiveData<Int>()
+    val dialogInt = MutableLiveData<Int>()
 
-    fun setDialogInt(number: Int) {
-        diaologInt.value = number
-    }
 
     fun setDialogRecipe(id: Int) {
         testDialogRecipe.value = id
@@ -63,8 +60,6 @@ class RecipesViewModel(private val repository: RecipeRepository) : ViewModel() {
             MainScope().launch { _recipesListFromSearch.value = list }
         }
     }
-
-
 
     fun saveUserRecipeToDb(
         title: String?,

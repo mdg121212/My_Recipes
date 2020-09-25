@@ -5,8 +5,10 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Base64
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -28,13 +30,20 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
+    external fun getNativeKey1(): String
+    val key = String(Base64.decode(getNativeKey1(), Base64.DEFAULT))
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(activity_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         toolbar.title = "My Recipes"
-        Constants.isNetworkAvailable(this)
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            Constants.isNetworkAvailable(this)
+        } else {
+            Constants.isNetworkAvailable2(this)
+        }
         requestPermissions()
 
 
@@ -134,5 +143,9 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-
+    companion object {
+        init {
+            System.loadLibrary("keys")
+        }
+    }
 }
