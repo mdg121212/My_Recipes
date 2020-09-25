@@ -111,7 +111,7 @@ class AddRecipeFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requireActivity().onBackPressedDispatcher.addCallback(this){
-            //making sure that from this fragment, when back button is pressed double check to save current recipe progress
+            //making sure that from this fragment, when back button is pressed there is an option to save current recipe progress
             showSaveDialog()
         }
     }
@@ -142,11 +142,6 @@ class AddRecipeFragment : BaseFragment() {
 
         recipesViewModel.getRecipeById2(loadedId).observe(viewLifecycleOwner, {
             if (it != null) {
-                Toast.makeText(
-                    requireContext(),
-                    "loadedId gave us a recipe $loadedId",
-                    Toast.LENGTH_LONG
-                ).show()
                 wasLoaded = true
                 editText_addrecipe_directions.setText(it.directions)
                 if (it.imageOne != null) {
