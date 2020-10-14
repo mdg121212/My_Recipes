@@ -12,4 +12,5 @@
     <color name="brightOrangeItemColor">#FF9800</color>
     <color name="appLightGrey">#81D6D6D6</color>
     <color name="itemTextWhite">#FFFFFF</color>
+    <color name="homeScreenTextColor">#595959</color>
 </resources>

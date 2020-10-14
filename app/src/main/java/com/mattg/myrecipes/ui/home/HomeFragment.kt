@@ -59,7 +59,7 @@ class HomeFragment : Fragment() {
         homeViewModel.hasCalled.observe(viewLifecycleOwner, {
             if (it) {
                 //if call has been made, show the list, not the options for searching
-                adapter = ApiRecipeAdapter(requireContext(), clickListener)
+                adapter = ApiRecipeAdapter(clickListener)
                 recycler.adapter = adapter
                 recycler.visibility = View.VISIBLE
                 setViewsGone(homeScreenViews)
@@ -108,7 +108,7 @@ class HomeFragment : Fragment() {
             //use action to navigate
             Navigation.findNavController(requireParentFragment().requireView()).navigate(args)
         }
-        adapter = ApiRecipeAdapter(requireContext(), clickListener)
+        adapter = ApiRecipeAdapter(clickListener)
         recycler.adapter = adapter
 
         setHomeScreenItemsClickListeners(recycler, homeScreenViews)
@@ -211,6 +211,8 @@ class HomeFragment : Fragment() {
             viewOnClickedMethod(recycler, homeScreenViews, tv_chinese_title)
             it.startAnimation(fadeAnimation)
         }
+        //for some reason 'thai' doesn't return any results from spoonacular, but 'thai curry' will...
+        //therefore this button makes a call but never returns a result
         thai_button_layout.setOnClickListener {
             viewOnClickedMethod(recycler, homeScreenViews, tv_thai_title)
             it.startAnimation(fadeAnimation)

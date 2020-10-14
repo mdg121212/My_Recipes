@@ -9,16 +9,15 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.*
-import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.Glide
 import com.mattg.myrecipes.BaseFragment
 import com.mattg.myrecipes.R
 import com.mattg.myrecipes.db.RecipeRepository
 import com.mattg.myrecipes.db.RecipesDatabase
 import com.mattg.myrecipes.ui.viewrecipes.RecipesViewModel
+import com.mattg.myrecipes.utils.GlideApp
 import kotlinx.android.synthetic.main.fragment_addrecipe.*
 import kotlinx.android.synthetic.main.fragment_addrecipe.view.*
 import java.io.ByteArrayOutputStream
@@ -144,9 +143,14 @@ class AddRecipeFragment : BaseFragment() {
             if (it != null) {
                 wasLoaded = true
                 editText_addrecipe_directions.setText(it.directions)
-                if (it.imageOne != null) {
+                if (it.imageOne != null || it.imageOne != "") {
                     uriToSave = it.imageOne.toString()
-                    Glide.with(this).load(it.imageOne).into(imageView_addphoto)
+                    GlideApp.with(this)
+                        .load(it.imageOne)
+                        .error(R.drawable.ic_baseline_add_a_photo_24)
+                        .into(imageView_addphoto)
+
+
                     loadedImage = it.imageOne.toString()
                 }
                 editText_addrecipe_ingredients.setText(it.ingredients)
@@ -225,12 +229,11 @@ class AddRecipeFragment : BaseFragment() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (resultCode == Activity.RESULT_OK && requestCode == GALLERY_PICTURE_REQUEST_CODE) {
-            Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
             wasGallery = true
             wasCamera = false
             val uri = data?.data!!
             galleryUri = uri.toString()
-            Glide.with(this)
+            GlideApp.with(this)
                 .load(uri)
                 .into(imageView_addphoto)
         }
@@ -241,9 +244,7 @@ class AddRecipeFragment : BaseFragment() {
             val d = data?.extras?.get("data")
             val forPic = getImageUri(requireContext(), d as Bitmap)
             cameraUri = forPic.toString()
-            Toast.makeText(requireContext(), "$d", Toast.LENGTH_SHORT).show()
-            Toast.makeText(requireContext(), "$result", Toast.LENGTH_SHORT).show()
-            Glide.with(this)
+            GlideApp.with(this)
                 .load(forPic)
                 .into(imageView_addphoto)
         }

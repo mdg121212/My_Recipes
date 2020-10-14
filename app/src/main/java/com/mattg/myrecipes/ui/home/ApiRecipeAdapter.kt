@@ -1,7 +1,6 @@
 package com.mattg.myrecipes.ui.home
 
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.animation.AlphaAnimation
@@ -11,7 +10,7 @@ import com.mattg.myrecipes.models.responsePreset.Result
 import com.mattg.myrecipes.ui.viewrecipes.ApiClickListener
 
 
-class ApiRecipeAdapter(private val context: Context, private val clickListener: ApiClickListener) :
+class ApiRecipeAdapter(private val clickListener: ApiClickListener) :
     RecyclerView.Adapter<ApiRecipeAdapter.ApiViewHolder>() {
     //moved from constructor
     private var results: List<Result> = ArrayList()

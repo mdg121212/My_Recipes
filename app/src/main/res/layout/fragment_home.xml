@@ -33,9 +33,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
-                android:alpha=".5"
                 android:text="@string/dessert_text"
-                android:textColor="@color/primaryTextColor"
+                android:textColor="@color/homeScreenTextColor"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -50,7 +49,7 @@
 
                 <ImageView
                     android:id="@+id/imageView4"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/image_button_content_descrioption_text"
                     android:scaleType="centerCrop"
@@ -100,7 +99,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.3" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/breakfast_button_layout"
@@ -122,24 +122,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
-                android:alpha=".5"
                 android:text="@string/breakfast_text"
-                android:textColor="@color/primaryTextColor"
+                android:textColor="@color/homeScreenTextColor"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cy_breakfast_image"
+                android:id="@+id/cv_breakfast_image"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginStart="32dp"
                 app:cardCornerRadius="40dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.533">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:id="@+id/imageView3"
@@ -172,9 +170,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
-                android:alpha=".5"
                 android:text="@string/mexican_text"
-                android:textColor="@color/primaryTextColor"
+                android:textColor="@color/homeScreenTextColor"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -240,9 +237,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
-                android:alpha=".5"
                 android:text="@string/indian_text"
-                android:textColor="@color/primaryTextColor"
+                android:textColor="@color/homeScreenTextColor"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -288,9 +284,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
-                android:alpha=".5"
                 android:text="@string/american_text"
-                android:textColor="@color/primaryTextColor"
+                android:textColor="@color/homeScreenTextColor"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -337,9 +332,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
-                android:alpha=".5"
                 android:text="@string/chinese_text"
-                android:textColor="@color/primaryTextColor"
+                android:textColor="@color/homeScreenTextColor"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -387,9 +381,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
-                android:alpha=".5"
                 android:text="@string/thai_text"
-                android:textColor="@color/primaryTextColor"
+                android:textColor="@color/homeScreenTextColor"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />

@@ -4,7 +4,8 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.bumptech.glide.Glide
+import com.mattg.myrecipes.R
+import com.mattg.myrecipes.utils.GlideApp
 
 @BindingAdapter("android:setVisible")
 fun setVisible(textView: TextView, isLeftover: Boolean){
@@ -16,8 +17,14 @@ fun setVisible(textView: TextView, isLeftover: Boolean){
 }
 
 @BindingAdapter("android:loadImage")
-fun loadImage(imageView: ImageView, imageUrl: String){
-    Glide.with(imageView)
-        .load(imageUrl)
-        .into(imageView)
-}
+fun loadImage(imageView: ImageView, imageUrl: String?){
+    if(imageUrl == null || imageUrl == ""){
+        GlideApp.with(imageView)
+            .load(R.drawable.ic_baseline_add_a_photo_24)
+            .into(imageView)
+    } else {
+        GlideApp.with(imageView)
+            .load(imageUrl)
+            .into(imageView)
+    }
+    }

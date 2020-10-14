@@ -7,10 +7,10 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.Glide
 import com.mattg.myrecipes.BaseFragment
 import com.mattg.myrecipes.R
 import com.mattg.myrecipes.ui.home.HomeViewModel
+import com.mattg.myrecipes.utils.GlideApp
 import kotlinx.android.synthetic.main.view_api_recipe_fragment.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -83,7 +83,7 @@ class ViewApiRecipeFragment : BaseFragment() {
 
         viewModel.recipeResponse.observe(viewLifecycleOwner,  {
             titleText.text = it.title
-            Glide.with(requireContext())
+            GlideApp.with(requireContext())
                 .load(it.image)
                 .into(imageHolder)
 
