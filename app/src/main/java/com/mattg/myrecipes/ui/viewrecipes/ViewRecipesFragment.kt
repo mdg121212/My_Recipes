@@ -118,7 +118,7 @@ class ViewRecipesFragment : BaseFragment() {
          }
 
          AlertDialog.Builder(requireContext()).setTitle("View recipe?")
-            .setPositiveButton("Yes") { _, _ ->
+
                 //get relevant data from current recipe
                 val recipe = listForFragment?.get(position)
                 //create a dialog that shows this data in an inflated layout
@@ -136,10 +136,8 @@ class ViewRecipesFragment : BaseFragment() {
                     .load(recipe?.imageOne)
                     .into(view.imageView_addphoto_edit)
                 viewDialog.setView(view).show()
-                    }
-                    .setNegativeButton("No") { dialog, _ ->
-                        dialog.dismiss()
-                    }.show()
+                    
+
         }
 
 
