@@ -41,7 +41,6 @@ class ViewRecipesFragment : BaseFragment() {
         //create factory with repository
         val factory = RecipeViewModelFactory(repository)
 
-        //assign viewModel instance to data binding object
         recipesViewModel = ViewModelProvider(this, factory).get(RecipesViewModel::class.java)
         observeViewModel()
 
