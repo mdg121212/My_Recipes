@@ -67,9 +67,7 @@ class ViewRecipesAdapter(val context: Context,
             }
         }
 
-
     }
-
 
     override fun getItemId(position: Int): Long {
         return position.toLong()
