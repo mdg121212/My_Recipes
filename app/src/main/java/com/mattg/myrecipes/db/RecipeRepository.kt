@@ -21,14 +21,6 @@ class RecipeRepository(private val dao: RecipeDao) {
         dao.insertRecipe(recipe)
     }
 
-//    fun updateRecipe(recipe: Recipe) {
-//        dao.updateRecipe(recipe)
-//
-//    }
-//     fun getRecipeById(id: String): Recipe {
-//     return dao.getRecipeById(id)
-// }
-
     fun getRecipeByIdLive(id: String): LiveData<Recipe> {
         return dao.getRecipeById2(id)
     }
