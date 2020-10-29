@@ -48,9 +48,9 @@ class AddRecipeFragment : BaseFragment() {
     private var loadedImage = ""
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         setHasOptionsMenu(true)
 
@@ -62,8 +62,8 @@ class AddRecipeFragment : BaseFragment() {
 
         //get the date
         val currentTime: String = SimpleDateFormat(
-            " d MMM yyyy",
-            Locale.getDefault()
+                " d MMM yyyy",
+                Locale.getDefault()
         ).format(Date())
 
         //set date
@@ -96,20 +96,20 @@ class AddRecipeFragment : BaseFragment() {
     private fun startPictureDialog() {
 
         AlertDialog.Builder(requireContext())
-            .setPositiveButton("Take Picture") { _, _ ->
-                takePicture()
-            }
-            .setNegativeButton("Choose from gallery") { _, _ ->
-                openGalleryGetImage()
+                .setPositiveButton("Take Picture") { _, _ ->
+                    takePicture()
+                }
+                .setNegativeButton("Choose from gallery") { _, _ ->
+                    openGalleryGetImage()
 
-            }.setNeutralButton("Cancel") { _, _ ->
-                exitTransition
-            }.show()
+                }.setNeutralButton("Cancel") { _, _ ->
+                    exitTransition
+                }.show()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        requireActivity().onBackPressedDispatcher.addCallback(this){
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
             //making sure that from this fragment, when back button is pressed there is an option to save current recipe progress
             showSaveDialog()
         }
@@ -124,17 +124,17 @@ class AddRecipeFragment : BaseFragment() {
     private fun showSaveDialog() {
 
         AlertDialog.Builder(requireContext()).setTitle("Do you want to save?")
-            .setPositiveButton("Yes") { dialog, _ ->
-                saveRecipe()
-                findNavController().navigate(R.id.action_nav_addrecipe_to_nav_viewrecipes)
-                dialog.dismiss()
+                .setPositiveButton("Yes") { dialog, _ ->
+                    saveRecipe()
+                    findNavController().navigate(R.id.action_nav_addrecipe_to_nav_viewrecipes)
+                    dialog.dismiss()
 
-            }
-            .setNegativeButton("No") { dialog, _ ->
-                findNavController().navigate(R.id.action_nav_addrecipe_to_nav_viewrecipes)
-                dialog.dismiss()
+                }
+                .setNegativeButton("No") { dialog, _ ->
+                    findNavController().navigate(R.id.action_nav_addrecipe_to_nav_viewrecipes)
+                    dialog.dismiss()
 
-            }.show()
+                }.show()
     }
 
     private fun observeViewModelRecipe() {
@@ -146,9 +146,9 @@ class AddRecipeFragment : BaseFragment() {
                 if (it.imageOne != null || it.imageOne != "") {
                     uriToSave = it.imageOne.toString()
                     GlideApp.with(this)
-                        .load(it.imageOne)
-                        .error(R.drawable.ic_baseline_add_a_photo_24)
-                        .into(imageView_addphoto)
+                            .load(it.imageOne)
+                            .error(R.drawable.ic_baseline_add_a_photo_24)
+                            .into(imageView_addphoto)
 
 
                     loadedImage = it.imageOne.toString()
@@ -191,15 +191,15 @@ class AddRecipeFragment : BaseFragment() {
         }
 
         recipesViewModel.saveUserRecipeToDb(
-            editText_addrecipe_title.text.toString(),
-            editText_addrecipe_ingredients.text.toString(),
-            editText_addrecipe_directions.text.toString(),
-            editText_addrecipe_notes.text.toString(),
-            uriToSave,
-            ratingBar.rating,
-            textView_date.text.toString(),
-            isLeftover,
-            loadedId
+                editText_addrecipe_title.text.toString(),
+                editText_addrecipe_ingredients.text.toString(),
+                editText_addrecipe_directions.text.toString(),
+                editText_addrecipe_notes.text.toString(),
+                uriToSave,
+                ratingBar.rating,
+                textView_date.text.toString(),
+                isLeftover,
+                loadedId
         )
 
     }
@@ -234,8 +234,8 @@ class AddRecipeFragment : BaseFragment() {
             val uri = data?.data!!
             galleryUri = uri.toString()
             GlideApp.with(this)
-                .load(uri)
-                .into(imageView_addphoto)
+                    .load(uri)
+                    .into(imageView_addphoto)
         }
         if (resultCode == Activity.RESULT_OK && requestCode == TAKE_PICTURE_REQUEST_CODE) {
             val result = data?.data
@@ -245,8 +245,8 @@ class AddRecipeFragment : BaseFragment() {
             val forPic = getImageUri(requireContext(), d as Bitmap)
             cameraUri = forPic.toString()
             GlideApp.with(this)
-                .load(forPic)
-                .into(imageView_addphoto)
+                    .load(forPic)
+                    .into(imageView_addphoto)
         }
 
     }
@@ -255,10 +255,10 @@ class AddRecipeFragment : BaseFragment() {
         val bytes = ByteArrayOutputStream()
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
         @Suppress("DEPRECATION") val path = MediaStore.Images.Media.insertImage(
-            inContext.contentResolver,
-            inImage,
-            "Title",
-            null
+                inContext.contentResolver,
+                inImage,
+                "Title",
+                null
         )
         return Uri.parse(path)
     }
