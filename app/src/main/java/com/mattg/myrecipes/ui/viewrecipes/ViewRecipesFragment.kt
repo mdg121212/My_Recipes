@@ -130,7 +130,7 @@ class ViewRecipesFragment : BaseFragment() {
                 view.editText_editrecipe_title.setText(recipe?.title)
                 view.textView_date_edit.text = recipe?.date
                 disableEdit(view)
-                recipe?.rating.apply { view.ratingBar_edit.rating = recipe?.rating!! }
+                recipe?.rating.apply { view.ratingBar_edit.rating = recipe?.rating ?: 0f }
                 Glide.with(this)
                     .load(recipe?.imageOne)
                     .into(view.imageView_addphoto_edit)
