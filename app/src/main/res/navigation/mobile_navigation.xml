@@ -21,11 +21,17 @@
         <action
             android:id="@+id/action_nav_home_to_nav_viewrecipes"
             app:destination="@id/nav_viewrecipes"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out" />
+            app:enterAnim="@anim/enter_left_to_right"
+            app:exitAnim="@anim/exit_left_to_right"
+            app:popEnterAnim="@anim/enter_left_to_right"
+            app:popExitAnim="@anim/exit_left_to_right" />
         <action
             android:id="@+id/action_nav_home_to_viewApiRecipeFragment"
             app:destination="@id/viewApiRecipeFragment"
+            app:enterAnim="@anim/enter_left_to_right"
+            app:exitAnim="@anim/exit_left_to_right"
+            app:popEnterAnim="@anim/enter_left_to_right"
+            app:popExitAnim="@anim/exit_left_to_right"
             app:popUpTo="@id/nav_home" />
     </fragment>
 
@@ -37,10 +43,18 @@
         >
         <action
             android:id="@+id/action_nav_viewrecipes_to_nav_home"
-            app:destination="@id/nav_home" />
+            app:destination="@id/nav_home"
+            app:enterAnim="@anim/enter_left_to_right"
+            app:exitAnim="@anim/exit_left_to_right"
+            app:popEnterAnim="@anim/enter_left_to_right"
+            app:popExitAnim="@anim/exit_left_to_right" />
         <action
             android:id="@+id/action_nav_viewrecipes_to_nav_addrecipe"
-            app:destination="@id/nav_addrecipe" />
+            app:destination="@id/nav_addrecipe"
+            app:enterAnim="@anim/enter_left_to_right"
+            app:exitAnim="@anim/exit_left_to_right"
+            app:popEnterAnim="@anim/exit_left_to_right"
+            app:popExitAnim="@anim/exit_left_to_right" />
         <argument android:name="id"
             app:argType="string"
             android:defaultValue="666" />
@@ -54,13 +68,17 @@
         <action
             android:id="@+id/action_nav_addrecipe_to_nav_home"
             app:destination="@id/nav_home"
-            app:enterAnim="@anim/slide_up"
-            app:exitAnim="@anim/slide_down"
-            app:popEnterAnim="@anim/slide_down"
-            app:popExitAnim="@anim/slide_up" />
+            app:enterAnim="@anim/enter_left_to_right"
+            app:exitAnim="@anim/exit_left_to_right"
+            app:popEnterAnim="@anim/enter_left_to_right"
+            app:popExitAnim="@anim/exit_left_to_right" />
         <action
             android:id="@+id/action_nav_addrecipe_to_nav_viewrecipes"
             app:destination="@id/nav_viewrecipes"
+            app:enterAnim="@anim/enter_left_to_right"
+            app:exitAnim="@anim/exit_left_to_right"
+            app:popEnterAnim="@anim/enter_left_to_right"
+            app:popExitAnim="@anim/exit_left_to_right"
             app:popUpTo="@id/nav_home" />
         <argument
             android:name="id"
@@ -76,6 +94,10 @@
         <action
             android:id="@+id/action_viewApiRecipeFragment_to_nav_home"
             app:destination="@id/nav_home"
+            app:enterAnim="@anim/enter_left_to_right"
+            app:exitAnim="@anim/exit_left_to_right"
+            app:popEnterAnim="@anim/enter_left_to_right"
+            app:popExitAnim="@anim/exit_left_to_right"
             app:popUpTo="@id/nav_home" />
         <argument
             android:name="positionInt"
@@ -84,6 +106,10 @@
         <action
             android:id="@+id/action_viewApiRecipeFragment_to_nav_viewrecipes"
             app:destination="@id/nav_viewrecipes"
+            app:enterAnim="@anim/enter_left_to_right"
+            app:exitAnim="@anim/exit_left_to_right"
+            app:popEnterAnim="@anim/enter_left_to_right"
+            app:popExitAnim="@anim/exit_left_to_right"
             app:popUpTo="@id/nav_home" />
     </fragment>
 </navigation>
