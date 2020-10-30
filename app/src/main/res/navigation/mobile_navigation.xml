@@ -13,24 +13,24 @@
         <action
             android:id="@+id/action_nav_home_to_nav_addrecipe"
             app:destination="@id/nav_addrecipe"
-            app:enterAnim="@anim/enter_left_to_right"
+            app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/exit_right_to_left"
-            app:popEnterAnim="@anim/exit_right_to_left"
+            app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/enter_left_to_right"
             app:popUpTo="@id/nav_home" />
         <action
             android:id="@+id/action_nav_home_to_nav_viewrecipes"
             app:destination="@id/nav_viewrecipes"
-            app:enterAnim="@anim/enter_left_to_right"
+            app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/exit_left_to_right"
-            app:popEnterAnim="@anim/enter_left_to_right"
+            app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/exit_left_to_right" />
         <action
             android:id="@+id/action_nav_home_to_viewApiRecipeFragment"
             app:destination="@id/viewApiRecipeFragment"
-            app:enterAnim="@anim/enter_left_to_right"
+            app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/exit_left_to_right"
-            app:popEnterAnim="@anim/enter_left_to_right"
+            app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/exit_left_to_right"
             app:popUpTo="@id/nav_home" />
     </fragment>
@@ -44,16 +44,16 @@
         <action
             android:id="@+id/action_nav_viewrecipes_to_nav_home"
             app:destination="@id/nav_home"
-            app:enterAnim="@anim/enter_left_to_right"
+            app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/exit_left_to_right"
-            app:popEnterAnim="@anim/enter_left_to_right"
+            app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/exit_left_to_right" />
         <action
             android:id="@+id/action_nav_viewrecipes_to_nav_addrecipe"
             app:destination="@id/nav_addrecipe"
-            app:enterAnim="@anim/enter_left_to_right"
+            app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/exit_left_to_right"
-            app:popEnterAnim="@anim/exit_left_to_right"
+            app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/exit_left_to_right" />
         <argument android:name="id"
             app:argType="string"
@@ -68,16 +68,16 @@
         <action
             android:id="@+id/action_nav_addrecipe_to_nav_home"
             app:destination="@id/nav_home"
-            app:enterAnim="@anim/enter_left_to_right"
+            app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/exit_left_to_right"
-            app:popEnterAnim="@anim/enter_left_to_right"
+            app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/exit_left_to_right" />
         <action
             android:id="@+id/action_nav_addrecipe_to_nav_viewrecipes"
             app:destination="@id/nav_viewrecipes"
-            app:enterAnim="@anim/enter_left_to_right"
+            app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/exit_left_to_right"
-            app:popEnterAnim="@anim/enter_left_to_right"
+            app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/exit_left_to_right"
             app:popUpTo="@id/nav_home" />
         <argument
@@ -94,9 +94,9 @@
         <action
             android:id="@+id/action_viewApiRecipeFragment_to_nav_home"
             app:destination="@id/nav_home"
-            app:enterAnim="@anim/enter_left_to_right"
+            app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/exit_left_to_right"
-            app:popEnterAnim="@anim/enter_left_to_right"
+            app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/exit_left_to_right"
             app:popUpTo="@id/nav_home" />
         <argument
@@ -106,9 +106,9 @@
         <action
             android:id="@+id/action_viewApiRecipeFragment_to_nav_viewrecipes"
             app:destination="@id/nav_viewrecipes"
-            app:enterAnim="@anim/enter_left_to_right"
+            app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/exit_left_to_right"
-            app:popEnterAnim="@anim/enter_left_to_right"
+            app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/exit_left_to_right"
             app:popUpTo="@id/nav_home" />
     </fragment>

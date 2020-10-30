@@ -33,48 +33,48 @@ class SpoonacularRepository(private val application: Application) {
 
     fun getSingleRecipe(id: Int) {
         ApiCallService.callSingleRecipe(application, id, key)
-            .enqueue(object : Callback<RecipeResponse> {
-                override fun onResponse(
-                    call: Call<RecipeResponse>,
-                    response: Response<RecipeResponse>
-                ) {
-                    showProgress.value = false
-                    recipeResponse.value = response.body()
-                }
+                .enqueue(object : Callback<RecipeResponse> {
+                    override fun onResponse(
+                            call: Call<RecipeResponse>,
+                            response: Response<RecipeResponse>
+                    ) {
+                        showProgress.value = false
+                        recipeResponse.value = response.body()
+                    }
 
-                override fun onFailure(call: Call<RecipeResponse>, t: Throwable) {
-                    showProgress.value = false
-                    Toast.makeText(application, "Request Failed: Network Error", Toast.LENGTH_SHORT)
-                        .show()
-                }
-            })
+                    override fun onFailure(call: Call<RecipeResponse>, t: Throwable) {
+                        showProgress.value = false
+                        Toast.makeText(application, "Request Failed: Network Error", Toast.LENGTH_SHORT)
+                                .show()
+                    }
+                })
     }
 
     fun getRetrofitResultsSearch(query: String) {
         ApiCallService.callSearch(application, key, query)
-            .enqueue(object : Callback<SpoonacularResponsePreset> {
-                override fun onFailure(call: Call<SpoonacularResponsePreset>, t: Throwable) {
-                    showProgress.value = false
-                    Toast.makeText(application, "Request Failed: Network Error", Toast.LENGTH_SHORT)
-                        .show()
-                }
-
-                override fun onResponse(
-                    call: Call<SpoonacularResponsePreset>,
-                    response: Response<SpoonacularResponsePreset>
-                ) {
-                    showProgress.value = false
-                    if (response.isSuccessful) {
-                        response.let {
-                            responseList.value = it.body()!!.results
-                            Log.i("callback", "response: ${Gson().toJson(response.body())}")
-                        }
-                    } else {
-                        Toast.makeText(application, "Network not responding", Toast.LENGTH_SHORT)
-                            .show()
+                .enqueue(object : Callback<SpoonacularResponsePreset> {
+                    override fun onFailure(call: Call<SpoonacularResponsePreset>, t: Throwable) {
+                        showProgress.value = false
+                        Toast.makeText(application, "Request Failed: Network Error", Toast.LENGTH_SHORT)
+                                .show()
                     }
-                }
-            })
+
+                    override fun onResponse(
+                            call: Call<SpoonacularResponsePreset>,
+                            response: Response<SpoonacularResponsePreset>
+                    ) {
+                        showProgress.value = false
+                        if (response.isSuccessful) {
+                            response.let {
+                                responseList.value = it.body()!!.results
+                                Log.i("callback", "response: ${Gson().toJson(response.body())}")
+                            }
+                        } else {
+                            Toast.makeText(application, "Network not responding", Toast.LENGTH_SHORT)
+                                    .show()
+                        }
+                    }
+                })
     }
 
     fun getRetrofitResults() {
@@ -85,42 +85,42 @@ class SpoonacularRepository(private val application: Application) {
         val randomProtien = getRandomString(proteins)
 
         ApiCallService.callPresetOnOpen(
-            application,
-            key,
-            10,
-            randomCuisine,
-            randomProtien,
-            "random"
+                application,
+                key,
+                10,
+                randomCuisine,
+                randomProtien,
+                "random"
         )
-            .enqueue(object : Callback<SpoonacularResponsePreset> {
-                override fun onFailure(call: Call<SpoonacularResponsePreset>, t: Throwable) {
-                    showProgress.value = false
-                    Toast.makeText(
-                        application,
-                        "Request Failed: Network Error $t, Trying again..",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                .enqueue(object : Callback<SpoonacularResponsePreset> {
+                    override fun onFailure(call: Call<SpoonacularResponsePreset>, t: Throwable) {
+                        showProgress.value = false
+                        Toast.makeText(
+                                application,
+                                "Request Failed: Network Error $t, Trying again..",
+                                Toast.LENGTH_SHORT
+                        ).show()
 
-                }
-
-                override fun onResponse(
-                    call: Call<SpoonacularResponsePreset>,
-                    response: Response<SpoonacularResponsePreset>
-                ) {
-                    showProgress.value = false
-                    //Generate a list of results when the response code is success
-                    if (response.code() == 200) {
-                        val list = response.body()!!.results
-                        resultString = list.toString()
-                        listToSend = list
-                        responseList.value = list
-                        //now link live data to viewmodel inside init function
-                    } else {
-                        Toast.makeText(application, "Network not responding..", Toast.LENGTH_SHORT)
-                            .show()
                     }
-                }
-            })
+
+                    override fun onResponse(
+                            call: Call<SpoonacularResponsePreset>,
+                            response: Response<SpoonacularResponsePreset>
+                    ) {
+                        showProgress.value = false
+                        //Generate a list of results when the response code is success
+                        if (response.code() == 200) {
+                            val list = response.body()!!.results
+                            resultString = list.toString()
+                            listToSend = list
+                            responseList.value = list
+                            //now link live data to viewmodel inside init function
+                        } else {
+                            Toast.makeText(application, "Network not responding..", Toast.LENGTH_SHORT)
+                                    .show()
+                        }
+                    }
+                })
     }
 
     private fun getRandomString(List: Array<String>): String {
@@ -129,33 +129,33 @@ class SpoonacularRepository(private val application: Application) {
 
     fun getMainScreenResult(input: String) {
         ApiCallService.callMainScreenGetRecipes(application, key, 15, input, "random")
-            .enqueue(object : Callback<SpoonacularResponsePreset> {
-                override fun onFailure(call: Call<SpoonacularResponsePreset>, t: Throwable) {
-                    showProgress.value = false
-                    Toast.makeText(
-                        application,
-                        "Request Failed: Network Error $t",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                .enqueue(object : Callback<SpoonacularResponsePreset> {
+                    override fun onFailure(call: Call<SpoonacularResponsePreset>, t: Throwable) {
+                        showProgress.value = false
+                        Toast.makeText(
+                                application,
+                                "Request Failed: Network Error $t",
+                                Toast.LENGTH_SHORT
+                        ).show()
 
-                }
-
-                override fun onResponse(
-                    call: Call<SpoonacularResponsePreset>,
-                    response: Response<SpoonacularResponsePreset>
-                ) {
-                    showProgress.value = false
-                    if (response.code() == 200) {
-                        val list = response.body()!!.results
-                        resultString = list.toString()
-                        listToSend = list
-                        responseList.value = list
-                    } else {
-                        Toast.makeText(application, "Network not responding..", Toast.LENGTH_SHORT)
-                            .show()
                     }
-                }
-            })
+
+                    override fun onResponse(
+                            call: Call<SpoonacularResponsePreset>,
+                            response: Response<SpoonacularResponsePreset>
+                    ) {
+                        showProgress.value = false
+                        if (response.code() == 200) {
+                            val list = response.body()!!.results
+                            resultString = list.toString()
+                            listToSend = list
+                            responseList.value = list
+                        } else {
+                            Toast.makeText(application, "Network not responding..", Toast.LENGTH_SHORT)
+                                    .show()
+                        }
+                    }
+                })
     }
 }
 
