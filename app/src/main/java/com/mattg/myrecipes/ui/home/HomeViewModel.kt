@@ -70,7 +70,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     //saving the recipe to the local database
-    fun saveApiRecipe(title: String, ingredients: String, step: String, image: String?) {
+    fun saveApiRecipe(title: String, ingredients: String, step: String, image: String?, date: String?) {
         val uri = Uri.parse("android.resource://com.mattg.myrecipes/drawable/placeholder")
         val recipeToSave = Recipe(
             title,
@@ -81,7 +81,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
             null,
             null,
             null,
-            null,
+            date,
             false
         )
 

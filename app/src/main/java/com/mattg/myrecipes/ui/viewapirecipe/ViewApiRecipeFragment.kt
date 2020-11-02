@@ -16,6 +16,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ViewApiRecipeFragment : BaseFragment() {
 
@@ -27,13 +29,21 @@ class ViewApiRecipeFragment : BaseFragment() {
     private var ingredientString = ""
     private var stepString = ""
     private var imageLocation: String? = null
+    private lateinit var currentTime: String
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         setHasOptionsMenu(true)
         position = args.positionInt
+
+        //get the date
+        currentTime = SimpleDateFormat(
+                " d MMM yyyy",
+                Locale.getDefault()
+        ).format(Date())
+
         return inflater.inflate(R.layout.view_api_recipe_fragment, container, false)
     }
 
@@ -49,19 +59,20 @@ class ViewApiRecipeFragment : BaseFragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             R.id.viewapirecipe_save -> {
                 CoroutineScope(Dispatchers.Default).launch {
                     viewModel.saveApiRecipe(tv_api_view_title.text.toString(),
-                        ingredientString,
-                        stepString,
-                        imageLocation
+                            ingredientString,
+                            stepString,
+                            imageLocation,
+                            currentTime
                     )
                     MainScope().launch {
                         Toast.makeText(
-                            requireContext(),
-                            "Recipe Saved",
-                            Toast.LENGTH_SHORT
+                                requireContext(),
+                                "Recipe Saved",
+                                Toast.LENGTH_SHORT
                         ).show()
                         findNavController().navigate(R.id.action_viewApiRecipeFragment_to_nav_viewrecipes)
                     }
@@ -71,7 +82,7 @@ class ViewApiRecipeFragment : BaseFragment() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun observeViewModels(){
+    private fun observeViewModels() {
         val directionsText = tv_api_view_directions
         val ingredientsText = tv_api_view_ingredients
         val imageHolder = iv_api_view_image_picture
@@ -81,11 +92,11 @@ class ViewApiRecipeFragment : BaseFragment() {
 
         viewModel.getSingleRecipe(position)
 
-        viewModel.recipeResponse.observe(viewLifecycleOwner,  {
+        viewModel.recipeResponse.observe(viewLifecycleOwner, {
             titleText.text = it.title
             GlideApp.with(requireContext())
-                .load(it.image)
-                .into(imageHolder)
+                    .load(it.image)
+                    .into(imageHolder)
 
             val ingredients = it.extendedIngredients
             for (ingredient in ingredients) {
@@ -103,13 +114,13 @@ class ViewApiRecipeFragment : BaseFragment() {
                 stepString += "$step "
                 val stepDetails = it.analyzedInstructions[0].steps
                 //  TODO("Some recipes do not have clearly delimited steps.  The result is one long grammatically" +
-               //         "incorrect string; need to figure out how to format these cases.")
-                    for (item in stepDetails) {
-                        stepNumber++
-                        val name = item.step
-                        stepString += "$stepNumber: $name\n\n"
-                    }
-                    directionsText.text = stepString
+                //         "incorrect string; need to figure out how to format these cases.")
+                for (item in stepDetails) {
+                    stepNumber++
+                    val name = item.step
+                    stepString += "$stepNumber: $name\n\n"
+                }
+                directionsText.text = stepString
 
             }
             urlText.text = it.sourceUrl
@@ -120,12 +131,12 @@ class ViewApiRecipeFragment : BaseFragment() {
 
     private fun initializeViews() {
         val viewsList = listOf(
-            iv_api_view_image_picture,
-            tv_api_view_title,
-            tv_api_view_directions,
-            tv_api_view_ingredients,
-            tv_api_view_url_link)
-        for(view in viewsList){
+                iv_api_view_image_picture,
+                tv_api_view_title,
+                tv_api_view_directions,
+                tv_api_view_ingredients,
+                tv_api_view_url_link)
+        for (view in viewsList) {
             view.visibility = View.VISIBLE
         }
     }

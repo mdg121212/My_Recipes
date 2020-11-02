@@ -20,7 +20,7 @@
         android:layout_height="275dp"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="2dp"
-        android:background="@color/appLightGrey"
+        android:background="@drawable/recipecubesbackground2"
         android:fitsSystemWindows="false"
         android:paddingStart="4dp"
         android:paddingEnd="4dp"
@@ -28,7 +28,6 @@
 
 
         <ImageView
-            android:loadImage="@{recipe.imageOne}"
             android:id="@+id/imageView_item_image"
             android:layout_width="175dp"
             android:layout_height="175dp"
@@ -36,6 +35,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:contentDescription="@string/image_content_description_text"
+            android:loadImage="@{recipe.imageOne}"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -46,14 +46,19 @@
             android:id="@+id/textView_itemTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
+            android:background="#E9FFFFFF"
             android:fontFamily="@font/alike"
+            android:textAlignment="center"
             android:textColor="@android:color/secondary_text_light"
             android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/imageView_item_image"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView_item_image"
-            app:layout_constraintTop_toTopOf="@+id/imageView_item_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="@{recipe.title}" />
 
         <TextView
@@ -66,6 +71,7 @@
             android:text="@string/creation_date_text"
             android:textAlignment="viewEnd"
             android:textColor="@android:color/secondary_text_light"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/imageView_item_image"
             app:layout_constraintTop_toBottomOf="@+id/textView_itemTitle" />
 
@@ -87,8 +93,8 @@
             android:layout_height="17dp"
             android:layout_marginTop="16dp"
             android:numStars="5"
+            android:progressTint="@color/secondaryColor"
             android:rating="@{recipe.rating}"
-            android:progressTint="@color/secondaryDarkColor"
             android:saveEnabled="false"
             app:layout_constraintEnd_toEndOf="@+id/imageButton_itemedit"
             app:layout_constraintStart_toStartOf="@+id/imageButton_itemedit"
@@ -101,7 +107,7 @@
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="32dp"
             android:background="#00FFFFFF"
             android:contentDescription="@string/image_button_content_descrioption_text"
             android:scaleType="fitCenter"
@@ -118,7 +124,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="32dp"
             android:background="#00FFFFFF"
             android:contentDescription="@string/image_button_content_descrioption_text"
             android:scaleType="fitCenter"
@@ -135,7 +141,8 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="32dp"
             android:background="#00FFFFFF"
             android:contentDescription="@string/image_button_content_descrioption_text"
             android:scaleType="fitCenter"
@@ -147,13 +154,13 @@
             app:srcCompat="@drawable/preview2" />
 
         <TextView
-            android:setVisible="@{recipe.isLeftover()}"
             android:id="@+id/tv_isLeftovers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:setVisible="@{recipe.isLeftover()}"
             android:text="@string/l"
             android:textColor="@color/secondaryColor"
-            android:textSize="24sp"
+            android:textSize="30sp"
             android:textStyle="bold|italic"
 
             app:layout_constraintEnd_toEndOf="parent"

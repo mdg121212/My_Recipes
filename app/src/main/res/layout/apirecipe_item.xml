@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
-        android:background="@color/appLightGrey"
+        android:background="@drawable/recipecubesbackground"
         android:paddingBottom="4dp">
 
         <ImageView
@@ -22,8 +22,8 @@
             android:layout_height="250dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:loadImage="@{item.image}"
             android:contentDescription="@string/add_image_contentdescription"
+            android:loadImage="@{item.image}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,17 +31,19 @@
             app:srcCompat="@drawable/ic_menu_gallery" />
 
         <TextView
-            android:text="@{item.title}"
             android:id="@+id/tv_apiitem_title"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="16dp"
+            android:background="#C4FFFFFF"
             android:fontFamily="@font/alike"
+            android:text="@{item.title}"
             android:textAlignment="center"
-            android:textSize="24sp"
+            android:textSize="30sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/iv_apiitem_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,16 +53,18 @@
 
         <TextView
             android:id="@+id/tv_apiitem_link"
-            android:layout_width="0dp"
-            android:text="@{item.creditsText}"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="16dp"
+            android:background="#C4FFFFFF"
             android:fontFamily="@font/alike"
+            android:text="@{item.creditsText}"
             android:textAlignment="center"
-            android:textSize="18sp"
+            android:textSize="24sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -32,11 +32,29 @@
             app:layout_constraintTop_toTopOf="@id/api_recipe_layout"
             tools:text="TEXT" />
 
+        <View
+            android:id="@+id/detail_view"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:background="#83595959"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_api_view_image_picture"
+            app:layout_constraintTop_toTopOf="@+id/iv_api_view_image_picture" />
+
+        <View
+            android:id="@+id/detail_view2"
+            android:layout_width="match_parent"
+            android:layout_height="325dp"
+            android:background="#ABFFFFFF"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_api_view_image_picture"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/iv_api_view_image_picture" />
+
         <ImageView
             android:id="@+id/iv_api_view_image_picture"
             android:layout_width="0dp"
             android:layout_height="300dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="32dp"
             android:contentDescription="@string/add_image_contentdescription"
             android:src="@drawable/ic_menu_gallery"
             android:visibility="invisible"
@@ -55,7 +73,7 @@
             android:fontFamily="@font/alike"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_api_view_image_picture"
+            app:layout_constraintTop_toBottomOf="@+id/detail_view"
             tools:text="TEXT"
             tools:visibility="invisible" />
 
