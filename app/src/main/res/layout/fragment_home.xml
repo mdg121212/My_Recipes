@@ -25,7 +25,7 @@
             android:focusable="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/breakfast_button_layout">
+            app:layout_constraintTop_toBottomOf="@+id/dinner_button_layout">
 
             <TextView
                 android:id="@+id/tv_dessert_title"
@@ -151,7 +151,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/mexican_button_layout"
+            android:id="@+id/brunch_button_layout"
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_marginStart="16dp"
@@ -162,22 +162,22 @@
             android:focusable="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dessert_button_layout">
+            app:layout_constraintTop_toBottomOf="@+id/breakfast_button_layout">
 
             <TextView
-                android:id="@+id/tv_mexican_title"
+                android:id="@+id/tv_brunch_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
-                android:text="@string/mexican_text"
+                android:text="@string/brunch"
                 android:textColor="@color/homeScreenTextColor"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cv_mexican_image"
+                android:id="@+id/cv_brunch_image"
                 style="@style/circle_image_cardview"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
@@ -193,12 +193,12 @@
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/image_button_content_descrioption_text"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/mexicanfood" />
+                    android:src="@drawable/brunch" />
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/indian_button_layout"
+            android:id="@+id/lunch_button_layout"
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_marginStart="16dp"
@@ -209,10 +209,10 @@
             android:focusable="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mexican_button_layout">
+            app:layout_constraintTop_toBottomOf="@+id/brunch_button_layout">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cv_indian_image"
+                android:id="@+id/cv_lunch_image"
                 style="@style/circle_image_cardview"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
@@ -228,16 +228,16 @@
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/image_button_content_descrioption_text"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/indianfood" />
+                    android:src="@drawable/chickenburger" />
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/tv_indian_title"
+                android:id="@+id/tv_lunch_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
-                android:text="@string/indian_text"
+                android:text="@string/lunch"
                 android:textColor="@color/homeScreenTextColor"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -245,7 +245,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/american_button_layout"
+            android:id="@+id/appetizer_button_layout"
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_marginStart="16dp"
@@ -255,11 +255,12 @@
             android:clickable="true"
             android:focusable="true"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/indian_button_layout">
+            app:layout_constraintTop_toBottomOf="@+id/lunch_button_layout">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cv_american_image"
+                android:id="@+id/cv_appetizer_image"
                 style="@style/circle_image_cardview"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
@@ -275,16 +276,16 @@
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/image_button_content_descrioption_text"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/chickenburger" />
+                    android:src="@drawable/appetizer" />
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/tv_american_title"
+                android:id="@+id/tv_appetizer_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
-                android:text="@string/american_text"
+                android:text="@string/appetizers"
                 android:textColor="@color/homeScreenTextColor"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -292,7 +293,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/chinese_button_layout"
+            android:id="@+id/dinner_button_layout"
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_marginStart="16dp"
@@ -304,7 +305,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/american_button_layout">
+            app:layout_constraintTop_toBottomOf="@+id/appetizer_button_layout">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_chinese_image"
@@ -323,70 +324,20 @@
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/image_button_content_descrioption_text"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/chinesewonton" />
+                    android:src="@drawable/dinner" />
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/tv_chinese_title"
+                android:id="@+id/tv_dinner_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
-                android:text="@string/chinese_text"
+                android:text="Dinner"
                 android:textColor="@color/homeScreenTextColor"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/thai_button_layout"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:background="@color/appLightGrey"
-            android:clickable="true"
-            android:focusable="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chinese_button_layout">
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cv_thai_image"
-                style="@style/circle_image_cardview"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginStart="32dp"
-                app:cardCornerRadius="40dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:id="@+id/imageView10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/image_button_content_descrioption_text"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/thaicurry" />
-            </androidx.cardview.widget.CardView>
-
-            <TextView
-                android:id="@+id/tv_thai_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:text="@string/thai_text"
-                android:textColor="@color/homeScreenTextColor"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

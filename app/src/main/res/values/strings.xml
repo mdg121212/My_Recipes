@@ -36,6 +36,9 @@
     <string name="thai_text">Thai</string>
     <string name="l">L</string>
     <string name="todo">TODO</string>
+    <string name="appetizers">Appetizers</string>
+    <string name="brunch">Brunch</string>
+    <string name="lunch">Lunch</string>
     <string-array name="cuisines">
         <item>African</item>
         <item>American</item>

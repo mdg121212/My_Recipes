@@ -42,13 +42,12 @@ class HomeFragment : Fragment() {
 
         //create a list of all views that need to have their visibility attribute changed
         homeScreenViews = listOf<View>(
-            mexican_button_layout,
-            thai_button_layout,
-            american_button_layout,
+            brunch_button_layout,
+            appetizer_button_layout,
             breakfast_button_layout,
             dessert_button_layout,
-            indian_button_layout,
-            chinese_button_layout
+            lunch_button_layout,
+            dinner_button_layout
         )
 
         val recycler = rv_home_apirecipes
@@ -191,12 +190,12 @@ class HomeFragment : Fragment() {
         //animation for these items
         val fadeAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.fade_out)
 
-        mexican_button_layout.setOnClickListener {
-            viewOnClickedMethod(recycler, homeScreenViews, tv_mexican_title)
+        brunch_button_layout.setOnClickListener {
+            viewOnClickedMethod(recycler, homeScreenViews, tv_brunch_title)
             it.startAnimation(fadeAnimation)
         }
-        american_button_layout.setOnClickListener {
-            viewOnClickedMethod(recycler, homeScreenViews, tv_american_title)
+        appetizer_button_layout.setOnClickListener {
+            viewOnClickedMethod(recycler, homeScreenViews, tv_appetizer_title)
             it.startAnimation(fadeAnimation)
         }
         dessert_button_layout.setOnClickListener {
@@ -207,19 +206,13 @@ class HomeFragment : Fragment() {
             viewOnClickedMethod(recycler, homeScreenViews, tv_breakfast_title)
             it.startAnimation(fadeAnimation)
         }
-        chinese_button_layout.setOnClickListener {
-            viewOnClickedMethod(recycler, homeScreenViews, tv_chinese_title)
-            it.startAnimation(fadeAnimation)
-        }
-        //for some reason 'thai' doesn't return any results from spoonacular, but 'thai curry' will...
-        //therefore this button makes a call but never returns a result
-        thai_button_layout.setOnClickListener {
-            viewOnClickedMethod(recycler, homeScreenViews, tv_thai_title)
+        dinner_button_layout.setOnClickListener {
+            viewOnClickedMethod(recycler, homeScreenViews, tv_dinner_title)
             it.startAnimation(fadeAnimation)
         }
 
-        indian_button_layout.setOnClickListener {
-            viewOnClickedMethod(recycler, homeScreenViews, tv_indian_title)
+        lunch_button_layout.setOnClickListener {
+            viewOnClickedMethod(recycler, homeScreenViews, tv_lunch_title)
             it.startAnimation(fadeAnimation)
         }
     }
