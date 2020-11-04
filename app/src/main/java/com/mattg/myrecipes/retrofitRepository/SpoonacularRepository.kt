@@ -1,10 +1,8 @@
 package com.mattg.myrecipes.retrofitRepository
 
 import android.app.Application
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
-import com.google.gson.Gson
 import com.mattg.myrecipes.MainActivity
 import com.mattg.myrecipes.R
 import com.mattg.myrecipes.models.recipeSearchResult.RecipeResponse
@@ -67,7 +65,7 @@ class SpoonacularRepository(private val application: Application) {
                         if (response.isSuccessful) {
                             response.let {
                                 responseList.value = it.body()!!.results
-                                Log.i("callback", "response: ${Gson().toJson(response.body())}")
+
                             }
                         } else {
                             Toast.makeText(application, "Network not responding", Toast.LENGTH_SHORT)
