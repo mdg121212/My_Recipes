@@ -35,7 +35,7 @@ data class Recipe (
     @ColumnInfo
     val isLeftover: Boolean?
 ) {
-    //SECONDARY CONSTRUCTOR TO ALLOW RECIPES TO BE CREATED WITHOUT THE ID PARAMETER (AUTOINCREMENT)
+    //SECONDARY CONSTRUCTOR ALLOWS RECIPES TO BE CREATED WITHOUT THE ID PARAMETER (AUTOINCREMENT)
     @Ignore
     constructor(
         title: String?,

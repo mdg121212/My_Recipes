@@ -16,23 +16,18 @@ class RecipesViewModel(private val repository: RecipeRepository) : ViewModel() {
     lateinit var searchString: String
 
     val recipesList = repository.getAllRecipes()
-
     private val savedId = MutableLiveData<String>()
 
     private val _positionFromAdapter = MutableLiveData<Int>()
-
     val positionFromAdapter: MutableLiveData<Int> get() = _positionFromAdapter
 
     private val _recipesListFromSearch = MutableLiveData<List<Recipe>>()
-
     val recipesListFromSearch: LiveData<List<Recipe>> = _recipesListFromSearch
 
     private val _recipe = MutableLiveData<Recipe>()
-
     val recipe: LiveData<Recipe> = _recipe
 
     private val testDialogRecipe = MutableLiveData<Int>()
-
     val dialogInt = MutableLiveData<Int>()
 
 

@@ -11,17 +11,7 @@ import retrofit2.http.Query
 interface ApiCall {
 
 
-    @GET("complexSearch?&instructionsRequired=true&addRecipeInformation=true")
-    fun getRecipes(
-        @Query("apiKey") key: String,
-        @Query("number") number: Int,
-        @Query("cuisine") cuisine: String?,
-        @Query("query") query: String?,
-        @Query("sort") sort: String?
-
-    ): Call<SpoonacularResponsePreset>
-
-    //allows a general query of any parameters; for search bar home fragment
+    //allows a general query of any parameters; for search bar: home fragment
     @GET("complexSearch?&instructionsRequired=true&addRecipeInformation=true&number=10")
     fun getSearchedRecipes(
         @Query("apiKey") key: String,

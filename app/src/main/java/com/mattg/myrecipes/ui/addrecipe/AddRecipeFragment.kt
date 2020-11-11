@@ -29,7 +29,6 @@ private const val TAKE_PICTURE_REQUEST_CODE = 1
 private const val GALLERY_PICTURE_REQUEST_CODE = 2
 
 //uri placeholders
-
 private var galleryUri = ""
 private var cameraUri = ""
 private var wasGallery: Boolean = false
@@ -89,6 +88,7 @@ class AddRecipeFragment : BaseFragment() {
         val dao = RecipesDatabase.getInstance(requireContext()).recipeDao()
         //get repository with dao
         val repository = RecipeRepository(dao)
+        //pass repository to view model
         recipesViewModel = RecipesViewModel(repository)
         return root
     }

@@ -18,6 +18,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     //get instance of repository object, passing application context
     private val repository: SpoonacularRepository = SpoonacularRepository(application)
+    
     //from repository show progress variable here as well
     //can observe this now
     val showProgress : LiveData<Boolean>

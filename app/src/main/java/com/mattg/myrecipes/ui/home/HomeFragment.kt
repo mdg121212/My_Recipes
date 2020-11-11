@@ -27,6 +27,7 @@ class HomeFragment : Fragment() {
     private lateinit var clickListener: ApiClickListener
     private lateinit var homeScreenViews: List<View>
     private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Default)
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,7 +40,6 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         //create a list of all views that need to have their visibility attribute changed
         homeScreenViews = listOf<View>(
             brunch_button_layout,
@@ -53,17 +53,16 @@ class HomeFragment : Fragment() {
         val recycler = rv_home_apirecipes
 
         progressBar_home.visibility = View.INVISIBLE
-
-        //observe viewModel flag (whether an api call has been made)
+        //observe view model flag (whether an api call has been made)
         homeViewModel.hasCalled.observe(viewLifecycleOwner, {
             if (it) {
-                //if call has been made, show the list, not the options for searching
+                //if call has been made, show the list
                 adapter = ApiRecipeAdapter(clickListener)
                 recycler.adapter = adapter
                 recycler.visibility = View.VISIBLE
                 setViewsGone(homeScreenViews)
             } else {
-                //if a call has not been made, make views visible so they can be clicked
+                //if a call has not been made, make views visible
                 setViewsVisible(homeScreenViews)
                 recycler.visibility = View.GONE
             }
@@ -72,7 +71,6 @@ class HomeFragment : Fragment() {
             adapter.apply {
                 setList(it)
                 clickListener = ApiClickListener { id, _ ->
-                    //get a reference to the current result to send to fragment
                     // define action with id passed to nav args
                     val args = HomeFragmentDirections.actionNavHomeToViewApiRecipeFragment(id)
                     //use action to navigate
@@ -125,8 +123,7 @@ class HomeFragment : Fragment() {
         coroutineScope.launch {
             homeViewModel.getHomeScreenRecipes(string)
         }
-
-        //linking up the progress bar all the way to repository via viewModel from here
+        //linking up the progress bar
         homeViewModel.progressState()
         homeViewModel.showProgress.observe(viewLifecycleOwner, {
             if (it) {

@@ -3,7 +3,6 @@ package com.mattg.myrecipes.network
 import android.content.Context
 import com.karumi.dexter.BuildConfig
 import com.mattg.myrecipes.models.recipeSearchResult.RecipeResponse
-import com.mattg.myrecipes.models.responsePreset.AnalyzedInstruction
 import com.mattg.myrecipes.models.responsePreset.SpoonacularResponsePreset
 import okhttp3.Cache
 import okhttp3.OkHttpClient
@@ -68,21 +67,6 @@ object ApiCallService {
         return getApi(context).getSearchedRecipes(key, searchString)
     }
 
-    //originally loaded a random list of recipes to the home screen, still available but not in use
-    fun callPresetOnOpen(
-        context: Context,
-        key: String,
-        number: Int,
-        cuisine: String,
-        query: String,
-        sort: String
-    ): Call<SpoonacularResponsePreset> {
-        return getApi(context).getRecipes(key, number, cuisine, query, sort)
-    }
-
-    fun callIdInstructions(context: Context, id: Int, key: String): Call<AnalyzedInstruction> {
-        return getApi(context).getRecipeDetailsById(id, key)
-    }
 
     //getting a recipe search result from home screen buttons
     fun callMainScreenGetRecipes(
