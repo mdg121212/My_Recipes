@@ -77,6 +77,7 @@ class ViewRecipesFragment : BaseFragment() {
 
     private fun changeRecyclerView(){
         recipesViewModel.recipesListFromSearch.observe(viewLifecycleOwner, {
+            listForFragment = it
             rv_viewrecipes.adapter = ViewRecipesAdapter(requireContext(), it, this, clickListener)
             rv_viewrecipes.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         })
@@ -119,6 +120,7 @@ class ViewRecipesFragment : BaseFragment() {
 
          AlertDialog.Builder(requireContext()).setTitle("View recipe?")
                 //get relevant data from current recipe
+
                 val recipe = listForFragment?.get(position)
                 //create a dialog that shows this data in an inflated layout
                 val viewDialog = AlertDialog.Builder(context)
