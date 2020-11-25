@@ -138,6 +138,17 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        when(item.itemId){
+//            R.id.settings -> {
+//                val intent = Intent(this, SettingsActivity::class.java)
+//                startActivity(intent)
+//                Toast.makeText(this, "Settings Clicked", Toast.LENGTH_SHORT).show()
+//            }
+//        }
+//        return true
+//    }
+
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
