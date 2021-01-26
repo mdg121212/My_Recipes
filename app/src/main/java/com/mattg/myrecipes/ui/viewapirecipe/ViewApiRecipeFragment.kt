@@ -22,7 +22,6 @@ import java.util.*
 class ViewApiRecipeFragment : BaseFragment() {
 
     private var position: Int = 0
-
     //passing the position in list of results via navArgs
     private val args: ViewApiRecipeFragmentArgs by navArgs()
     private lateinit var viewModel: HomeViewModel

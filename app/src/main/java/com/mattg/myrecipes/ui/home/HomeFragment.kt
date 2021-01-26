@@ -1,6 +1,7 @@
 package com.mattg.myrecipes.ui.home
 
 
+
 import android.os.Bundle
 import android.view.*
 import android.view.animation.Animation
@@ -14,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mattg.myrecipes.MainActivity
 import com.mattg.myrecipes.R
 import com.mattg.myrecipes.ui.viewrecipes.ApiClickListener
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home_v2.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -50,7 +50,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         //create a list of all views that need to have their visibility attribute changed
-
         homeScreenViews = listOf<TextView>(
                 (tv_breakfast_titlev2),
                (tv_brunch_titlev2),
@@ -172,15 +171,12 @@ private fun viewOnClickedMethod(
 
                 homeViewModel.setLoading()
 
-
                 homeViewModel.fetchSearchResults(searchString = homeViewModel.searchString)
-
-
 
                 homeViewModel.setSearchResults()
 
                 hideHomeDefaultItems(homeScreenViews)
-                rv_home_apirecipes.visibility = View.VISIBLE
+                rv_home_apirecipesv2.visibility = View.VISIBLE
 
                 return true
             }
